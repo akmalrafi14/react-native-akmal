@@ -23,14 +23,14 @@ export default class App extends Component {
             isLoading: true
         });
 
-        Axios.post("http://192.168.43.210:5700/login", {
+        Axios.post("http://192.168.43.210:7100/login", {
             username,
             password
         }).then(response => {
-            console.log(response.status);
             if (response.status == 200) {
                 this.props.navigation.navigate("Profile", { userdata: response.data });
                 console.log("berhasil");
+                // console.log(response.data)
             }
         }).catch(error => {
             console.log(error);

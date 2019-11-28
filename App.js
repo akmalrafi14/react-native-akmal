@@ -1,31 +1,61 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Ham } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Login from "./Login";
+import { ScrollView } from 'react-native-gesture-handler';
+
+import Banner from "./Banner";
+import Stats from "./Stats";
+import ScrollImage from "./ScrollImage";
+import Content from "./Content";
 
 class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container, {
-        backgroundColor: "#bdc3c7",
-        height: "100%",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}>
-        <Text style={{
-          fontSize: 24,
-          paddingBottom: 24,
-          fontWeight: "600",
-        }}>App Title Here :D</Text>
-        <Text>Hello World!</Text>
-        <Text>This is my first app!</Text>
 
-        <Button onPress={() => {
-          this.props.navigation.navigate("Login");
+    const userdata = this.props.navigation.getParam("userdata");
+    // console.log(userdata)
+
+    return (
+      <View
+        style={{
+          height: "100%"
         }}
-          title="Click Me" ></Button>
+      >
+        <View style={{
+          elevation: 4,
+          height: 80,
+          paddingTop: 24,
+          backgroundColor: "#f39c12",
+          flexDirection: "row",
+          alignItems: "center"
+        }}>
+          <Image
+            source={Ham}
+            style={{
+              marginLeft: 10,
+              height: 30,
+              width: 30
+            }}
+          />
+          <Text
+            style={{
+              marginLeft: 10,
+              flex: 1,
+              color: "white",
+              fontSize: 20,
+              fontWeight: "bold"
+            }}
+          >My Home :D</Text>
+        </View>
+        <ScrollView
+          style={{ flex: 1 }}
+        >
+          <Banner userdata={{ userdata }} />
+          <Stats userdata={{ userdata }} />
+          <ScrollImage userdata={{ userdata }} />
+          <Content />
+        </ScrollView>
       </View>
     );
   }
@@ -39,7 +69,7 @@ const Navigator = createStackNavigator({
     }
   },
   Profile: {
-    screen: App,
+    screen: App, // Login
     navigationOptions: {
       header: null
     }
